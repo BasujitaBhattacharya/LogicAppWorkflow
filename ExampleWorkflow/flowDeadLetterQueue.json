@@ -1,0 +1,52 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Send_message": {
+                "inputs": {
+                    "body": {
+                        "ContentData": "@{triggerBody()?['ContentData']}",
+                        "ContentType": "@triggerBody()?['ContentType']",
+                        "SessionId": "@triggerBody()?['SessionId']"
+                    },
+                    "host": {
+                        "connection": {
+                            "referenceName": "servicebus-2"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/@{encodeURIComponent(encodeURIComponent('queue1'))}/messages",
+                    "queries": {
+                        "systemProperties": "None"
+                    }
+                },
+                "runAfter": {},
+                "type": "ApiConnection"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "When_a_message_is_received_in_a_queue_(auto-complete)": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "referenceName": "servicebus-2"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/@{encodeURIComponent(encodeURIComponent('queue1'))}/messages/head",
+                    "queries": {
+                        "queueType": "DeadLetter"
+                    }
+                },
+                "recurrence": {
+                    "frequency": "Minute",
+                    "interval": 5
+                },
+                "type": "ApiConnection"
+            }
+        }
+    },
+    "kind": "Stateful"
+}
