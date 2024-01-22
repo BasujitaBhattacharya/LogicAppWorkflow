@@ -19,7 +19,7 @@
   <img width="920" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/8e7b75e1-6f5c-4cb8-bb38-02cf3c28f5e7">
 
 
-- Logic App API Connection setting
+- Logic App API Connection setting - Using the Primary/Seconday Connection token of Service bus queue above
   <img width="926" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/13cc214a-e89d-46df-9bf2-dbf406c95fe8">
 
 
