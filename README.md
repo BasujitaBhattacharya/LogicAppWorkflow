@@ -9,4 +9,8 @@
 - Send Message to Queue Action Settings
   <img width="931" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/664973dc-7bae-4083-bdf8-6107a85f336d">
 
+- Service Bus SAS Token settings 
+  <img width="920" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/8e7b75e1-6f5c-4cb8-bb38-02cf3c28f5e7">
+
+
 
