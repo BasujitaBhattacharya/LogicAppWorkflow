@@ -2,49 +2,71 @@
     "definition": {
         "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
         "actions": {
-            "Send_message": {
+            "Delay": {
                 "inputs": {
-                    "body": {
-                        "ContentData": "@{triggerBody()?['ContentData']}",
-                        "ContentType": "@triggerBody()?['ContentType']",
-                        "SessionId": "@triggerBody()?['SessionId']"
-                    },
-                    "host": {
-                        "connection": {
-                            "referenceName": "servicebus-2"
-                        }
-                    },
-                    "method": "post",
-                    "path": "/@{encodeURIComponent(encodeURIComponent('queue1'))}/messages",
-                    "queries": {
-                        "systemProperties": "None"
+                    "interval": {
+                        "count": 3,
+                        "unit": "Minute"
                     }
                 },
                 "runAfter": {},
-                "type": "ApiConnection"
+                "type": "Wait"
+            },
+            "Delay_1": {
+                "inputs": {
+                    "interval": {
+                        "count": 3,
+                        "unit": "Minute"
+                    }
+                },
+                "runAfter": {
+                    "Send_message": [
+                        "SUCCEEDED"
+                    ]
+                },
+                "type": "Wait"
+            },
+            "Send_message": {
+                "inputs": {
+                    "parameters": {
+                        "entityName": "queue1",
+                        "message": {
+                            "contentData": "@triggerBody()?['contentData']",
+                            "contentType": "@triggerBody()?['contentType']",
+                            "sessionId": "@triggerBody()?['sessionId']"
+                        }
+                    },
+                    "serviceProviderConfiguration": {
+                        "connectionName": "serviceBus",
+                        "operationId": "sendMessage",
+                        "serviceProviderId": "/serviceProviders/serviceBus"
+                    }
+                },
+                "runAfter": {
+                    "Delay": [
+                        "SUCCEEDED"
+                    ]
+                },
+                "type": "ServiceProvider"
             }
         },
         "contentVersion": "1.0.0.0",
         "outputs": {},
         "triggers": {
-            "When_a_message_is_received_in_a_queue_(auto-complete)": {
+            "When_messages_are_available_in_a_queue": {
+                "conditions": [],
                 "inputs": {
-                    "host": {
-                        "connection": {
-                            "referenceName": "servicebus-2"
-                        }
+                    "parameters": {
+                        "queueName": "queue1/$deadletterqueue"
                     },
-                    "method": "get",
-                    "path": "/@{encodeURIComponent(encodeURIComponent('queue1'))}/messages/head",
-                    "queries": {
-                        "queueType": "DeadLetter"
+                    "serviceProviderConfiguration": {
+                        "connectionName": "serviceBus",
+                        "operationId": "receiveQueueMessages",
+                        "serviceProviderId": "/serviceProviders/serviceBus"
                     }
                 },
-                "recurrence": {
-                    "frequency": "Minute",
-                    "interval": 5
-                },
-                "type": "ApiConnection"
+                "splitOn": "@triggerOutputs()?['body']",
+                "type": "ServiceProvider"
             }
         }
     },
