@@ -12,20 +12,6 @@
                 "runAfter": {},
                 "type": "Wait"
             },
-            "Delay_1": {
-                "inputs": {
-                    "interval": {
-                        "count": 3,
-                        "unit": "Minute"
-                    }
-                },
-                "runAfter": {
-                    "Send_message": [
-                        "SUCCEEDED"
-                    ]
-                },
-                "type": "Wait"
-            },
             "Send_message": {
                 "inputs": {
                     "parameters": {
