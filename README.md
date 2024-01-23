@@ -2,18 +2,20 @@
 
 
 - Sample [stateful-workflow](ExampleWorkflow/flowDeadLetterQueue.json) triggered when messages are received on Dead Letter Queue of Azure Service Bus.
-- This workflow has an action to send the messages from DLQ to Active queue using the SessionID, Content type and Content.
+- This workflow has an action to send the messages from DLQ to Active queue using the SessionID, Content type and Content after a configurable delay of 3 mins.
 - It follows this documentation https://learn.microsoft.com/en-us/azure/connectors/connectors-create-api-servicebus?tabs=consumption
 
 # LogicApp Standard Workflow Designer View
 
 
-- Service Bus When a message is received in a queue (auto-complete) Built-in Trigger Settings
-  <img width="939" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/c0523637-0cc4-4a1b-ac0a-1cad7df4dbe7">
+- Service Bus "When a message is received in a queue" Built-in App Trigger Settings
+  <img width="934" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/e0c5aad5-d4cf-4487-8336-a156b14457c3">
 
-  
+- Delay Action
+  <img width="922" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/91f137ef-dafd-4291-8bff-d4abc9c46257">
+    
 - Send Message to Queue Action Settings
-  <img width="931" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/664973dc-7bae-4083-bdf8-6107a85f336d">
+ <img width="932" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/41ffbb2b-8c8e-4451-b077-7744125be054">
 
 
 - Service Bus SAS Token settings 
