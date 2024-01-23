@@ -24,8 +24,9 @@
   ![image](https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/c00fb466-d0aa-4f7a-bb65-2fc8a68252f6)
 
 
-## Logic App API Connection setting - Using the Primary/Seconday Connection token of Service bus queue above
-  <img width="926" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/13cc214a-e89d-46df-9bf2-dbf406c95fe8">
+## Logic App Service Provider Connection setting - Using the Primary/Seconday SAS token of Service bus above
+  ![image](https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/e0ad3fed-e193-41f5-8d43-136cd4370e1b)
+
 
 
 
