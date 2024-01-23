@@ -8,24 +8,23 @@
 
 # LogicApp Standard Workflow Designer View
 
-
-- Service Bus "When a message is received in a queue" Built-in App Trigger Settings
+## Service Bus "When a message is received in a queue" Built-in App Trigger Settings
   <img width="934" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/e0c5aad5-d4cf-4487-8336-a156b14457c3">
 
 
-- Delay Action
+## Delay Action
   <img width="922" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/91f137ef-dafd-4291-8bff-d4abc9c46257">
 
     
-- Send Message to Queue Action Settings
+## Send Message to Queue Action Settings
  <img width="932" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/41ffbb2b-8c8e-4451-b077-7744125be054">
 
 
-- Service Bus SAS Token settings 
-  <img width="920" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/8e7b75e1-6f5c-4cb8-bb38-02cf3c28f5e7">
+## Service Bus SAS Token settings 
+  ![image](https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/c00fb466-d0aa-4f7a-bb65-2fc8a68252f6)
 
 
-- Logic App API Connection setting - Using the Primary/Seconday Connection token of Service bus queue above
+## Logic App API Connection setting - Using the Primary/Seconday Connection token of Service bus queue above
   <img width="926" alt="image" src="https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/13cc214a-e89d-46df-9bf2-dbf406c95fe8">
 
 
