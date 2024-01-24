@@ -1,7 +1,7 @@
 # LogicApp Standard Workflow
 
 
-- Sample [stateful-workflow](ExampleWorkflow/flowDeadLetterQueue.json) triggered when messages are received on Dead Letter Queue of Azure Service Bus.
+- Sample [stateful-workflow](src/logicApp/Flow-DLQ-Message-Retrieval/workflow.json) triggered when messages are received on Dead Letter Queue of Azure Service Bus.
 - This workflow has an action to send the messages from DLQ to Active queue using the SessionID, Content type and Content after a configurable delay of 3 mins.
 - It follows this documentation https://learn.microsoft.com/en-us/azure/connectors/connectors-create-api-servicebus?tabs=consumption
 - It also has VNET Integration enabled to connect to Service Bus over Private Endpoint
