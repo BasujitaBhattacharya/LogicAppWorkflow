@@ -1,0 +1,14 @@
+# IaC variables
+
+variables:
+
+  projectName: 'logicappsample'
+  suffix: 'dev'
+
+
+  #  Logic App
+  logicAppName: 'logi-vfcqjvmubxxje'
+
+ 
+  # Project artifacts
+  logicAppCIArtifactName: 'logicapp_publish_artifact'
