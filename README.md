@@ -28,6 +28,27 @@
   ![image](https://github.com/BasujitaBhattacharya/LogicAppWorkflow/assets/121059306/e0ad3fed-e193-41f5-8d43-136cd4370e1b)
 
 
+## **Azure Pipelines**
+The .pipelines folder contains examples of how to deploy both the container version and the normal version of the logic app.
+
+### CI Pipeline
+Creates a zip of the project
+Swaps out parameter files configured specifically for the azure environment
+Publishes project zip as pipeline artifact
+
+### CD Pipeline
+Downloads CI pipeline artifact containing project zip
+Use the Azure Functions task to deploy the project
+
+### Pipeline Variables
+For both the classic and container deployment approach, you will need to supply a set of variables to make the deployments possible.
+
+Variable Files
+Under the variables/ folder & in some pipeline files, you will need to fill in some variables.
+
+NOTE: You can search for TODO to find all the values you need to replace.
+
+You will need need to create a service connection for your Azure subscription for many of the pipeline tasks to work. Follow this documentation to create your service connection.
 
 
 
