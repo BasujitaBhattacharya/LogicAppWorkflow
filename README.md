@@ -29,10 +29,10 @@
 
 
 ## **Azure Pipelines**
-The .pipelines folder contains examples of how to deploy both the container version and the normal version of the logic app.
+The .pipelines folder contains examples of how to deploy a workflow for the logic app.
 
 ### CI Pipeline
-Creates a zip of the project
+Build code and creates a zip of the project
 Swaps out parameter files configured specifically for the azure environment
 Publishes project zip as pipeline artifact
 
