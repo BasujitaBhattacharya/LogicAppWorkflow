@@ -1,60 +1,85 @@
 {
-  "definition": {
-    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-    "actions": {
-      "Send_message": {
-        "type": "ServiceProvider",
-        "inputs": {
-          "parameters": {
-            "entityName": "queue1",
-            "message": {
-              "contentData": "@triggerBody()?['contentData']",
-              "contentType": "@triggerBody()?['contentType']",
-              "sessionId": "@triggerBody()?['sessionId']"
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Check_message_age": {
+                "actions": {
+                    "Discard_message": {
+                        "inputs": {
+                            "runStatus": "Cancelled"
+                        },
+                        "type": "Terminate"
+                    }
+                },
+                "else": {
+                    "actions": {
+                        "Delay": {
+                            "inputs": {
+                                "interval": {
+                                    "count": 3,
+                                    "unit": "Minute"
+                                }
+                            },
+                            "type": "Wait"
+                        },
+                        "Send_message": {
+                            "inputs": {
+                                "parameters": {
+                                    "entityName": "queue1",
+                                    "message": {
+                                        "contentData": "@triggerBody()?['contentData']",
+                                        "contentType": "@triggerBody()?['contentType']",
+                                        "sessionId": "@triggerBody()?['sessionId']"
+                                    }
+                                },
+                                "serviceProviderConfiguration": {
+                                    "connectionName": "serviceBus",
+                                    "operationId": "sendMessage",
+                                    "serviceProviderId": "/serviceProviders/serviceBus"
+                                }
+                            },
+                            "runAfter": {
+                                "Delay": [
+                                    "SUCCEEDED"
+                                ]
+                            },
+                            "type": "ServiceProvider"
+                        }
+                    }
+                },
+                "expression": {
+                    "and": [
+                        {
+                            "greater": [
+                                "@addHours(utcNow(), -24)",
+                                "@formatDateTime(json(triggerBody()?['ContentData'])?['originalOrderDate'], 'yyyy-MM-ddTHH:mm:ssZ')"
+                            ]
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "If"
             }
-          },
-          "serviceProviderConfiguration": {
-            "connectionName": "serviceBus",
-            "operationId": "sendMessage",
-            "serviceProviderId": "/serviceProviders/serviceBus"
-          }
         },
-        "runAfter": {
-          "Delay": [
-            "SUCCEEDED"
-          ]
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "When_messages_are_available_in_a_queue": {
+                "conditions": [],
+                "inputs": {
+                    "parameters": {
+                        "queueName": "queue1/$deadletterqueue"
+                    },
+                    "serviceProviderConfiguration": {
+                        "connectionName": "serviceBus",
+                        "operationId": "receiveQueueMessages",
+                        "serviceProviderId": "/serviceProviders/serviceBus"
+                    }
+                },
+                "splitOn": "@triggerOutputs()?['body']",
+                "type": "ServiceProvider"
+            }
         }
-      },
-      "Delay": {
-        "type": "Wait",
-        "inputs": {
-          "interval": {
-            "count": 3,
-            "unit": "Minute"
-          }
-        },
-        "runAfter": {}
-      }
     },
-    "contentVersion": "1.0.0.0",
-    "outputs": {},
-    "triggers": {
-      "When_messages_are_available_in_a_queue": {
-        "type": "ServiceProvider",
-        "inputs": {
-          "parameters": {
-            "queueName": "queue1/$deadletterqueue"
-          },
-          "serviceProviderConfiguration": {
-            "connectionName": "serviceBus",
-            "operationId": "receiveQueueMessages",
-            "serviceProviderId": "/serviceProviders/serviceBus"
-          }
-        },
-        "conditions": [],
-        "splitOn": "@triggerOutputs()?['body']"
-      }
-    }
-  },
-  "kind": "Stateful"
+    "kind": "Stateful"
 }
